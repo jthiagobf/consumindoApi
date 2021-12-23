@@ -1,40 +1,54 @@
 import requests
+from tkinter import *
+
+
+def cep_input():
+    cep = ed.get()
+    return cep
 
 
 def main():
-    print('####################')
-    print('####################')
-    print('### consulta cep ###')
 
-    cep_input = input('Digite o cep para a consulta: ')
-
-    if len(cep_input) != 8:
-        print('quantidade errada de dígitos')
-        exit()
-
-    request = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep_input))
+    request = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep_input()))
 
     adress_data = request.json()
 
-    if 'erro' not in adress_data:
-        print('===> CEP Encontrado <===')
-        print('CEP: {}'.format(adress_data['cep']))
-        print('Logradouro: {}'.format(adress_data['logradouro']))
-        print('Complemento: {}'.format(adress_data['complemento']))
-        print('Bairro: {}'.format(adress_data['bairro']))
-        print('Localidade: {}'.format(adress_data['localidade']))
-        print('UF: {}'.format(adress_data['uf']))
-        print('DDD: {}'.format(adress_data['ddd']))
-    else:
-        print('{}: CEP inválido'.format(cep_input))
+    cep = adress_data['cep']
+    logradouro = adress_data['logradouro']
+    complemento = adress_data['complemento']
+    bairro = adress_data['bairro']
+    localidade = adress_data['localidade']
+    uf = adress_data['uf']
+    ddd = adress_data['ddd']
 
-    n_consulta = int(input('Deseja realizar uma nova consulta?\n1. Sim \n2. Sair '))
+    texto = f''' 
+    Cep: {cep}
+    Logradouro: {logradouro}
+    Complemento: {complemento}
+    Bairro: {bairro}
+    Localidade: {localidade}
+    UF: {uf}
+    DDD: {ddd}
+    Obrigado por utilizar!
+     '''
 
-    if n_consulta == 1:
-        main()
-    else:
-        print('Obrigado por utilizar!')
+    texto_cep['text'] = texto
 
 
-if __name__ == '__main__':
-    main()
+janela = Tk()
+janela.title('Consulta de CEP')
+
+texto_inicial = Label(janela, text='Digite o número do CEP para obter informações (Apenas números)')
+texto_inicial.grid(column=0, row=0, padx=15, pady=10)
+
+ed = Entry(janela, text='')
+ed.grid(column=0, row=1, padx=15, pady=10)
+
+botao = Button(janela, text='Buscar CEP', command=main)
+botao.grid(column=0, row=2, padx=15, pady=10)
+
+texto_cep = Label(janela, text='')
+texto_cep.grid(column=0, row=3, padx=15, pady=10)
+
+
+janela.mainloop()
