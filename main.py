@@ -49,7 +49,7 @@ botao.grid(column=0, row=2, padx=15, pady=10)
 texto_cep = Label(janela, text='')
 texto_cep.grid(column=0, row=3, padx=15, pady=10)
 
-novo_texto = Label(janela, text='Obrigado por utilizar!')
+novo_texto = Label(janela, text='Obrigado por utilizar !')
 novo_texto.grid(column=0, row=4, padx=15, pady=10)
 
 
