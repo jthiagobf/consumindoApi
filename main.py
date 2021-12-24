@@ -20,6 +20,10 @@ def main():
     localidade = adress_data['localidade']
     uf = adress_data['uf']
     ddd = adress_data['ddd']
+    siafi = adress_data['siafi']
+    gia = adress_data['gia']
+    ibge = adress_data['ibge']
+
 
     texto = f''' 
     Cep: {cep}
@@ -29,6 +33,14 @@ def main():
     Localidade: {localidade}
     UF: {uf}
     DDD: {ddd}
+    
+    --------------------
+    Outras informações:
+    
+    SIAFI: {siafi}
+    GIA (Apenas SP): {gia}
+    Código do IBGE: {ibge}
+    
      '''
 
     texto_cep['text'] = texto
@@ -51,6 +63,13 @@ texto_cep.grid(column=0, row=3, padx=15, pady=10)
 
 novo_texto = Label(janela, text='Obrigado por utilizar !')
 novo_texto.grid(column=0, row=4, padx=15, pady=10)
+
+obs_1 = Label(janela, text='*SIAFI = Sistema Integrado de Administração Financeira')
+obs_1.grid(column=0, row=5, padx=15, pady=10)
+
+obs_2 = Label(janela, text='*GIA = Guia de informação e apuração do ICMS')
+obs_2.grid(column=0, row=6, padx=15, pady=10)
+
 
 
 janela.mainloop()
